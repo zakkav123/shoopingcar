@@ -2,29 +2,40 @@
   <div class="my-goods-item">
     <div class="left">
       <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="input"
-        >
-        <label class="custom-control-label" for="input">
-          <img src="http://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" alt="">
+        <input
+          type="checkbox"
+          class="custom-control-input"
+          :id="obj.id"
+          v-model="obj.goods_state"
+        />
+        <label class="custom-control-label" :for="obj.id">
+          <img :src="obj.goods_img" alt="" />
         </label>
       </div>
     </div>
     <div class="right">
-      <div class="top">商品名字</div>
+      <div class="top">{{ obj.goods_name }}</div>
       <div class="bottom">
-        <span class="price">¥ 100</span>
-        <span>
-            数量组件
-        </span>
+        <span class="price">{{ obj.goods_price }}</span>
+        <span> <MyCount :goods="obj"></MyCount> </span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import MyCount from "./MyCount.vue";
 export default {
-
-}
+  components: {
+    MyCount,
+  },
+  props: {
+    obj: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
@@ -49,9 +60,9 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    .top{
-        font-size: 14px;
-        font-weight: 700;
+    .top {
+      font-size: 14px;
+      font-weight: 700;
     }
     .bottom {
       display: flex;
@@ -65,5 +76,4 @@ export default {
     }
   }
 }
-
 </style>
